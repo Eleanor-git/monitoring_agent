@@ -1,0 +1,16 @@
+[Unit]
+Description=Monitoring Agent
+After=network-online.target
+
+[Service]
+Type=simple
+
+User=root
+
+ExecStart=/usr/bin/python3 /opt/monitoring_agent.py
+
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

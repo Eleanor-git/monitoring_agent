@@ -1,5 +1,5 @@
 import logging, logging.handlers
-import datetime, time, socket, psutil
+import time, socket, psutil
 
 
 def logging_setup(log_fname):
@@ -138,20 +138,20 @@ def network_monitor(network_targets, timeout_sec=1, ipv4=True):
 
 if __name__ == "__main__":
     log_fname = "/Users/eleanor/git_local_repository/monitoring_agent/log/monitoring_agent.log"
+    # log_fname = "/var/log/monitoring_agent.log"
     logging_setup(log_fname)
     logging.info("===== Monitoring Agent Started =====")
 
     network_targets = [{"type": "Internal", "addr": "192.168.1.254", "port": 53},
-                       {"type": "Internal", "addr": "localhost", "port": 443},
+                       {"type": "Internal", "addr": "192.168.64.1", "port": 53},
                        {"type": "External", "addr": "www.graid.com", "port": 80},
-                       {"type": "External", "addr": "7.7.7.7", "port": 22},
-                       {"type": "External", "addr": "2001:b000:168::2", "port": 53}]
+                       {"type": "External", "addr": "www.qut.edu.au", "port": 443}]
     while True:
         try:
             resources_monitor(cpu_threshold=80, mem_threshold=80, disk_threshold=80)
             zombies_detection()
-            network_monitor(network_targets, timeout_sec=1, ipv4=False)
+            network_monitor(network_targets, timeout_sec=1, ipv4=True)
         except Exception as e:
             logging.exception(f"Unexpected Error: {e}")
 
-        time.sleep(10)
+        time.sleep(60)
