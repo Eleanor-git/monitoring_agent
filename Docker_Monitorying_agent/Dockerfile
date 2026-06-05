@@ -1,8 +1,8 @@
-FROM python:3
+FROM python:3.13-alpine 
 
 RUN pip install psutil
 
-COPY . /opt
+COPY ./monitoring_agent.py /opt
 
 WORKDIR /opt
 
