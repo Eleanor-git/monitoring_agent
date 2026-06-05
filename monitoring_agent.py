@@ -43,6 +43,43 @@ def get_zombie_processes():
     return zombies
 
 
+def tcp_connection_reachable_check(ip_addr, port, timeout_sec=3, ipv4=True):
+    """
+    Check the TCP connection of the provided ip_addr, port
+
+    Return:
+        bool
+        True if reachable else exception
+
+    Params:
+        ip_addr: str
+            The IP address or hostname
+        port : int
+            The port number
+        timeout_sec: int
+            The timeout for the connection attempt in seconds.
+    """
+
+    if ipv4:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    else:
+        sock = socket.socket(socket.AF_INET6, socket.SOCK_DGRAM)
+
+    sock.settimeout(timeout_sec)
+    try:
+        sock.connect((ip_addr, port))
+        return True
+
+    except ConnectionRefusedError:
+        return f"[ERROR] Connection refused"
+    except socket.timeout:
+        return f"[ERROR] TCP time out"
+    except socket.gaierror:
+        return "[ERROR] DNS ERROR"
+    except Exception as e:
+        return e
+
+
 if __name__ == "__main__":
     log_fname = "/Users/eleanor/git_local_repository/monitoring_agent/log/monitoring_agent.log"
-    logging_setup(log_fname)
+    # logging_setup(log_fname)
