@@ -12,7 +12,8 @@ def logging_setup(log_fname):
     logging.basicConfig(level=logging.INFO,
                         format="%(asctime)s [%(levelname)s] %(message)s",
                         handlers=[console_handler, trf_handler])
-
+def send_mail():
+    pass
 
 def get_resource_usage(resource: str = 'cpu'):
     """
@@ -75,12 +76,16 @@ def tcp_connection_reachable_check(ip_addr, port, timeout_sec=3, ipv4=True):
         return f"SUCCESS"
 
     except ConnectionRefusedError:
+        # send_mail()
         return f"[ERROR] Connection refused"
     except socket.timeout:
+        # send_mail()
         return f"[ERROR] TCP time out"
     except socket.gaierror:
+        # send_mail()
         return "[ERROR] DNS ERROR"
     except Exception as e:
+        # send_mail()
         return e
     finally:
         sock.close()
@@ -95,12 +100,15 @@ def resources_monitor(cpu_threshold=80, mem_threshold=80, disk_threshold=80):
 
     if cpu > cpu_threshold:
         logging.warning(f"High CPU Usage: {cpu:.2f}%")
+        # send_mail()
 
     if mem > mem_threshold:
         logging.warning(f"High MEM Usage: {mem:.2f}%")
+        # send_mail()
 
     if disk > disk_threshold:
         logging.warning(f"High Disk Usage: {disk:.2f}%")
+        # send_mail()
 
 
 def zombies_detection():
@@ -110,6 +118,7 @@ def zombies_detection():
 
         for z in zombies_lst:
             logging.warning(f"Zombie PID: {z['pid']}, Process Name:{z['name']}, username:{z['username']}")
+            # send_mail()
 
 
 def network_monitor(network_targets, timeout_sec=1, ipv4=True):
@@ -137,8 +146,8 @@ def network_monitor(network_targets, timeout_sec=1, ipv4=True):
 
 
 if __name__ == "__main__":
-    # log_fname = "/Users/eleanor/git_local_repository/monitoring_agent/log/monitoring_agent.log"
-    log_fname = "/var/log/monitoring_agent.log"
+    log_fname = "/Users/eleanor/git_local_repository/monitoring_agent/log/monitoring_agent.log"
+    # log_fname = "/var/log/monitoring_agent.log"
     logging_setup(log_fname)
     logging.info("===== Monitoring Agent Started =====")
 
