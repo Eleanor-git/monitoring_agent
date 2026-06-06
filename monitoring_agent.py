@@ -148,14 +148,13 @@ def network_monitor(network_targets, timeout_sec=1, ipv4=True):
 
 
 if __name__ == "__main__":
+    # log_fname = "./log/monitoring_agent.log"
     log_fname = "/var/log/monitoring_agent.log"
     logging_setup(log_fname)
     logging.info("===== Monitoring Agent Started =====")
 
     network_targets = [{"type": "Internal", "addr": "192.168.1.254", "port": 53},
-                       {"type": "Internal", "addr": "192.168.64.1", "port": 53},
-                       {"type": "External", "addr": "www.graid.com", "port": 80},
-                       {"type": "External", "addr": "www.qut.edu.au", "port": 443}]
+                       {"type": "External", "addr": "www.graid.com", "port": 80}]
     while True:
         try:
             resources_monitor(cpu_threshold=80, mem_threshold=80, disk_threshold=80)
