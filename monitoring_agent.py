@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import logging, logging.handlers
 import time, socket, psutil
 
@@ -146,8 +148,7 @@ def network_monitor(network_targets, timeout_sec=1, ipv4=True):
 
 
 if __name__ == "__main__":
-    log_fname = "/Users/eleanor/git_local_repository/monitoring_agent/log/monitoring_agent.log"
-    # log_fname = "/var/log/monitoring_agent.log"
+    log_fname = "/var/log/monitoring_agent.log"
     logging_setup(log_fname)
     logging.info("===== Monitoring Agent Started =====")
 
