@@ -3,7 +3,7 @@
 A lightweight monitoring agent written in Python for Linux servers.
 
 ## Architecture
-```mermaid
+```text
                                 +---------------------------+
                                 |     systemd service       |
                                 +------------+--------------+
