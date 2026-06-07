@@ -53,6 +53,18 @@ A lightweight monitoring agent written in Python for Linux servers.
 - systemd service support
 - service starts automatically on reboot
 - Automatic restart on failure
+
+---
+## Docker Image
+The docker image for demonstration has been built and push to docker hub.
+
+The **monitoring agent** can be run easily on your docker with the following command 
+```bash
+docker run --name monitoring_agent wickedeleanor/monitoring_agent:latest 
+```
+
+If docker image does not work on your side, then the following instruction to run the script may be another solution.
+
 ---
 
 ## Requirements
@@ -134,8 +146,6 @@ Log Example
 2026-06-06 13:22:06,554 [ERROR] Internal connection to| host = 192.168.1.254| port = 53| [Errno 65] No route to host
 2026-06-06 13:22:07,555 [ERROR] Internal connection to| host = 192.168.64.1| port = 53| [ERROR] TCP time out
 ```
-
----
 
 ## Future Improvements
 - Email notification on critical events
