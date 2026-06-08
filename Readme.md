@@ -136,7 +136,7 @@ sudo systemctl status monitor-agent
 
 Log Location
 ```bash
-/var/log/monitoring_agent.py
+/var/log/monitoring_agent.log
 ```
 
 Log Example
